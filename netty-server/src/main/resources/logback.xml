@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="layout_pattern" value="[%level]%date, [%thread]%file:%line, %msg%n"/>
+    <appender name="allLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <Encoding>UTF-8</Encoding>
+        <File>./logs/netty-server.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./logs/netty-server.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${layout_pattern}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <Encoding>UTF-8</Encoding>
+        <encoder>
+            <pattern>${layout_pattern}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="allLog"/>
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>
