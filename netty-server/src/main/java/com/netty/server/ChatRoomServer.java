@@ -10,6 +10,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
@@ -60,6 +61,8 @@ public class ChatRoomServer extends AbstractBaseServer {
                                     new HttpObjectAggregator(65536),
                                     //支持异步发送大的码流，一般用于发送文件流
                                     new ChunkedWriteHandler(),
+                                    //websocket握手处理
+                                    new WebSocketServerProtocolHandler("/websocket", null, true, 10485760),
                                     //心跳事件处理
                                     new IdleStateHandler(60, 0, 0),
                                     //websocket连接处理

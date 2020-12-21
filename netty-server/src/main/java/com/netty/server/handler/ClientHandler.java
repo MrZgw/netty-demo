@@ -32,10 +32,15 @@ public class ClientHandler extends SimpleChannelInboundHandler {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if (msg instanceof FullHttpRequest) {
-            handHttpRequest(ctx, (FullHttpRequest) msg);
-        } else if (msg instanceof WebSocketFrame) {
+//        if (msg instanceof FullHttpRequest) {
+//            handHttpRequest(ctx, (FullHttpRequest) msg);
+//        } else if (msg instanceof WebSocketFrame) {
+//            handleWebSocketRequest(ctx, (WebSocketFrame) msg);
+//        }
+        if (msg instanceof WebSocketFrame) {
             handleWebSocketRequest(ctx, (WebSocketFrame) msg);
+        } else {
+            ctx.fireChannelRead(msg);
         }
     }
 
@@ -50,6 +55,11 @@ public class ClientHandler extends SimpleChannelInboundHandler {
                 UserManager.removeChannel(ctx.channel());
                 UserManager.broadCastInfo(MessageCode.SYS_USER_COUNT, UserManager.getAuthUserCount());
             }
+        }
+
+        if (evt instanceof WebSocketServerProtocolHandler.HandshakeComplete) {
+            //保存通道
+            UserManager.addChannel(ctx.channel());
         }
         ctx.fireUserEventTriggered(evt);
     }
