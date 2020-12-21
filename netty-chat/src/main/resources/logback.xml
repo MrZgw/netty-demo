@@ -4,9 +4,9 @@
     <appender name="allLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <Append>true</Append>
         <Encoding>UTF-8</Encoding>
-        <File>./logs/netty-server.log</File>
+        <File>./logs/netty-chat.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>./logs/netty-server.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>./logs/netty-chat.log.%d{yyyy-MM-dd}</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
