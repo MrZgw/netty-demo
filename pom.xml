@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>netty-chat</module>
+        <module>netty-rpc</module>
     </modules>
     <packaging>pom</packaging>
     <description>netty 网络编程</description>
@@ -79,7 +80,7 @@
     <developers>
         <developer>
             <name>GuoWei Zhan</name>
-            <email>zhanguoewi@163.com</email>
+            <email>zhanguowei@163.com</email>
             <organizationUrl>https://github.com/MrZgw</organizationUrl>
         </developer>
     </developers>
